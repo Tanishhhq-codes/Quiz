@@ -8,42 +8,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const quizContent = [
         {
             initial: {
-                annie: "Hello everyone! I am Jessica, your safety instructor and saviour. Natural disasters don't warn you, but we can prepare ourselves!",
-                mrEarthquake: "MUHAHAHA! That's right! I strike without warning, turning your safe world upside down!"
+                annie: "Hi there! I'm Annie, your friendly neighborhood safety expert. We need to be prepared for anything!",
+                mrEarthquake: "MUHAHAHA! I am the mighty Mr. Earthquake! Time to shake things up! Let's see if you can survive my seismic challenge!"
             },
-            question: "You're in a classroom when the ground starts shaking. What should you do?",
+            question: "What's the first thing you should do during an earthquake?",
             options: [
                 "Drop, Cover, and Hold On",
                 "Run outside immediately",
-                "Stand near windows",
-                "Ignore teacher's instructions"
+                "Stand in a doorway",
+                "Use the elevator to evacuate"
             ],
             correctAnswer: "Drop, Cover, and Hold On",
             correctResponse: {
-                annie: "Excellent! Stay calm and take cover under a sturdy desk. It's your best protection!",
-                mrEarthquake: "BAH! Another smart student! I was hoping for some panic and chaos!"
+                annie: "Excellent! Drop, Cover, and Hold On is your best defense!",
+                mrEarthquake: "CURSES! Another smart one! You're ruining all my plans for chaos!"
             },
             wrongResponse: {
-                annie: "No! Running or standing near windows puts you at greater risk!",
-                mrEarthquake: "YES! Run around! Make my job of causing chaos easier! HAHAHA!"
-            }
-        },
-        {
-            question: "You're driving when an earthquake hits. What's the safest action?",
-            options: [
-                "Pull over safely away from buildings",
-                "Park in the middle of the road",
-                "Stop under a bridge or tunnel",
-                "Speed up to escape quickly"
-            ],
-            correctAnswer: "Pull over safely away from buildings",
-            correctResponse: {
-                annie: "Perfect! Stay in the car, turn on hazard lights, and stay away from hazards!",
-                mrEarthquake: "Ugh! Why can't you just panic and crash like everyone else?!"
-            },
-            wrongResponse: {
-                annie: "That's dangerous! Bridges and tunnels are especially hazardous during earthquakes!",
-                mrEarthquake: "EXCELLENT CHOICE! Nothing like a bridge collapse to add to the excitement!"
+                annie: "No! That's exactly what Mr. Earthquake wants you to do!",
+                mrEarthquake: "HAHAHA! YES! Run around in panic! This is getting entertaining!"
             }
         },
         {
@@ -56,48 +38,66 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             correctAnswer: "Under a sturdy desk or table",
             correctResponse: {
-                annie: "That's right! A sturdy desk can protect you from falling debris!",
+                annie: "Perfect! That desk might just save your life!",
                 mrEarthquake: "BAH! Hiding under furniture? Where's the drama in that?!"
             },
             wrongResponse: {
-                annie: "Think about it - heavy objects falling, glass breaking... is that where you want to be?",
-                mrEarthquake: "OH YES! Stand by those lovely shattering hazards! *evil laughter*"
+                annie: "That's a disaster waiting to happen! Think safer!",
+                mrEarthquake: "OH YES! Stand by those lovely shattering hazards! evil laughter"
             }
         },
         {
-            question: "After the main shock, what should you do?",
+            question: "What should you do after an earthquake stops?",
             options: [
                 "Check for injuries and hazards",
-                "Use matches to check damage",
-                "Run outside immediately",
-                "Use elevators to evacuate"
+                "Use matches to check for damage",
+                "Immediately use the telephone",
+                "Turn on all electrical appliances"
             ],
             correctAnswer: "Check for injuries and hazards",
             correctResponse: {
-                annie: "Correct! Stay calm and assess the situation carefully!",
-                mrEarthquake: "Careful planning? BORING! Where's the blind panic I ordered?"
+                annie: "Finally! Someone who doesn't think post-earthquake mood lighting is a good idea!",
+                mrEarthquake: "Party pooper! The matches would've made such a lovely secondary disaster..."
             },
             wrongResponse: {
-                annie: "That could lead to even more dangerous situations! Think safety first!",
-                mrEarthquake: "YES! Add more chaos to the situation! I love it when they make it worse!"
+                annie: "Oh perfect, because what this situation really needs is a fire... facepalm",
+                mrEarthquake: "YES! Let's add some sparks to the party! This is getting better by the minute!"
             }
         },
         {
-            question: "What should you do if trapped under debris?",
+            question: "What should you include in your earthquake emergency kit?",
+            options: [
+                "Water, food, and first-aid supplies",
+                "Just a flashlight",
+                "Only important documents",
+                "Television and gaming console"
+            ],
+            correctAnswer: "Water, food, and first-aid supplies",
+            correctResponse: {
+                annie: "Oh look, someone who doesn't think they can survive on selfie sticks and good vibes!",
+                mrEarthquake: "Aw man, I was hoping you'd pick the gaming console. Nothing like Minecraft during a real disaster!"
+            },
+            wrongResponse: {
+                annie: "Right... Because Instagram will totally feed you during an emergency.",
+                mrEarthquake: "Perfect! Nothing says 'I'm prepared' like having your high scores ready for the rescue team!"
+            }
+        },
+        {
+            question: "What should you do if you're trapped under debris?",
             options: [
                 "Cover mouth and tap on pipes",
                 "Light a match to see",
                 "Shout continuously",
-                "Try to move heavy debris"
+                "Try to move the debris"
             ],
             correctAnswer: "Cover mouth and tap on pipes",
             correctResponse: {
-                annie: "Excellent! Save your energy and make rhythmic noise to signal rescuers!",
-                mrEarthquake: "Methodical tapping? How dull! I prefer screaming and panic!"
+                annie: "Well, would you look at that - someone who doesn't think this is the time to start their fire-breathing career!",
+                mrEarthquake: "ARGH! Such calculated calmness! Where's the screaming? The panic? You're taking all the fun out of this!"
             },
             wrongResponse: {
-                annie: "That could make your situation much worse! Stay calm and conserve energy!",
-                mrEarthquake: "Perfect! Nothing says 'total disaster' like making everything worse! *maniacal laughter*"
+                annie: "Sure, because turning yourself into a human torch will DEFINITELY help the situation...",
+                mrEarthquake: "PERFECT! Nothing says 'total disaster' like combining my earthquake with a nice fire! I love a good combo disaster! maniacal laughter"
             }
         }
     ];
@@ -106,6 +106,46 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0;
     let timeLeft = 20;
     let timerInterval;
+
+    // Add audio elements
+    const correctSound = document.getElementById('correctSound');
+    const wrongSound = document.getElementById('wrongSound');
+    const bgMusic = document.getElementById('bgMusic');
+    
+    // Set up background music
+    bgMusic.volume = 0.15;  // Changed from 0.3 to 0.15 (15% volume)
+    bgMusic.loop = true;   
+    
+    // Function to start background music
+    function startBackgroundMusic() {
+        bgMusic.play()
+            .catch(error => {
+                console.log("Audio autoplay prevented:", error);
+                document.addEventListener('click', () => {
+                    bgMusic.play();
+                }, { once: true });
+            });
+    }
+
+    // Start background music
+    startBackgroundMusic();
+
+    // Ensure music continues playing after each sound effect
+    correctSound.addEventListener('play', () => {
+        bgMusic.volume = 0.05;  // Changed from 0.1 to 0.05 during effects
+    });
+    
+    correctSound.addEventListener('ended', () => {
+        bgMusic.volume = 0.15;  // Changed from 0.3 to 0.15
+    });
+    
+    wrongSound.addEventListener('play', () => {
+        bgMusic.volume = 0.05;  // Changed from 0.1 to 0.05 during effects
+    });
+    
+    wrongSound.addEventListener('ended', () => {
+        bgMusic.volume = 0.15;  // Changed from 0.3 to 0.15
+    });
 
     function showCharacterDialogue(character, text) {
         // Remove existing bubble if any
@@ -146,42 +186,37 @@ document.addEventListener('DOMContentLoaded', () => {
     function startTimer() {
         clearInterval(timerInterval);
         timeLeft = 20;
-        updateTimer();
+        
+        // Remove old timer bar if exists
+        const oldTimer = document.querySelector('.timer-bar');
+        if (oldTimer) oldTimer.remove();
+        
+        // Create new timer bar
+        const timerBar = document.createElement('div');
+        timerBar.className = 'timer-bar';
+        document.getElementById('quiz-box').appendChild(timerBar);
+        
         timerInterval = setInterval(() => {
             timeLeft--;
-            updateTimer();
             if (timeLeft <= 0) {
                 handleTimeUp();
-            } else if (timeLeft <= 5) {
-                document.querySelector('.timer').classList.add('warning');
             }
         }, 1000);
     }
 
-    function updateTimer() {
-        document.getElementById('timer').textContent = timeLeft;
-    }
-
     function handleTimeUp() {
         clearInterval(timerInterval);
+        wrongSound.currentTime = 0;
+        wrongSound.play();
         const randomTimeUpDialog = timeDialogues.timeUp[Math.floor(Math.random() * timeDialogues.timeUp.length)];
         showCharacterDialogue('mrEarthquake', randomTimeUpDialog);
         showCharacterDialogue('annie', "Stay focused! Quick thinking is essential during an earthquake!");
         handleAnswer('');
     }
 
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-
     function displayQuestion(index) {
         const currentQuiz = quizContent[index];
         startTimer();
-        document.querySelector('.timer').classList.remove('warning');
         
         // Show initial dialogue
         if (currentQuiz.initial) {
@@ -193,20 +228,14 @@ document.addEventListener('DOMContentLoaded', () => {
         dialogueElement.textContent = currentQuiz.question;
         quizOptionsElement.innerHTML = '';
 
-        // Create shuffled options array with their correct/incorrect status
-        const optionsWithStatus = currentQuiz.options.map(option => ({
-            text: option,
-            isCorrect: option === currentQuiz.correctAnswer
-        }));
-        
-        // Shuffle the options
-        const shuffledOptions = shuffleArray([...optionsWithStatus]);
+        // Randomize options
+        const shuffledOptions = [...currentQuiz.options].sort(() => Math.random() - 0.5);
 
-        // Create option buttons with shuffled order
+        // Create option buttons
         shuffledOptions.forEach((option, i) => {
             const button = document.createElement('button');
-            button.textContent = option.text;
-            button.addEventListener('click', () => handleAnswer(option.text));
+            button.textContent = option;
+            button.addEventListener('click', () => handleAnswer(option));
             quizOptionsElement.appendChild(button);
 
             gsap.from(button, {
@@ -242,6 +271,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentQuiz = quizContent[currentQuestionIndex];
         const isCorrect = selectedAnswer === currentQuiz.correctAnswer;
 
+        // Play appropriate sound
+        if (isCorrect) {
+            correctSound.currentTime = 0; // Reset sound to start
+            correctSound.play();
+            score++;
+        } else {
+            wrongSound.currentTime = 0; // Reset sound to start
+            wrongSound.play();
+        }
+
         // Find the selected button and the correct button
         const buttons = quizOptionsElement.querySelectorAll('button');
         buttons.forEach(button => {
@@ -255,11 +294,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     button.style.background = 'linear-gradient(45deg, #4CAF50, #45a049)';
                 }, 1000);
             }
-            button.disabled = true; // Disable all buttons after answer
+            button.disabled = true;
         });
 
         if (isCorrect) {
-            score++;
             showCharacterDialogue('annie', currentQuiz.correctResponse.annie);
             showCharacterDialogue('mrEarthquake', currentQuiz.correctResponse.mrEarthquake);
         } else {
@@ -277,19 +315,12 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 endQuiz();
             }
-        }, 2500); // Increased delay to show colors
+        }, 2500);
     }
 
     function endQuiz() {
         dialogueElement.textContent = `Quiz Complete! You scored ${score}/${quizContent.length}`;
-        
-        // Create container for end buttons
-        quizOptionsElement.innerHTML = `
-            <div class="end-buttons">
-                <button onclick="location.reload()" class="replay-btn">Play Again</button>
-                <button onclick="window.location.href='https://disaster-inky.vercel.app/'" class="home-btn">Home</button>
-            </div>
-        `;
+        quizOptionsElement.innerHTML = '<button onclick="window.location.href=\'https://disaster-inky.vercel.app/\'">HOME</button>';
     }
 
     // Add new character animations
@@ -315,4 +346,4 @@ const timeDialogues = {
         "BOOM! Time's up! Watch everything crumble!",
         "Should've been quicker! Now feel the earth's fury!"
     ]
-}; 
+};
