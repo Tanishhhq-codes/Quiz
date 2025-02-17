@@ -107,44 +107,54 @@ document.addEventListener('DOMContentLoaded', () => {
     let timeLeft = 20;
     let timerInterval;
 
-    // Add audio elements
+    // Set up background music immediately
+    const bgMusic = document.getElementById('bgMusic');
+    bgMusic.volume = 0.08;
+    bgMusic.loop = true;
+    
+    // Force play on page load
+    const playAudio = () => {
+        bgMusic.play()
+            .then(() => {
+                document.removeEventListener('click', playAudio);
+                console.log('Background music started');
+            })
+            .catch(error => {
+                console.log('Autoplay prevented, waiting for click');
+            });
+    };
+
+    // Try to play immediately
+    playAudio();
+    
+    // Backup: play on first click if autoplay fails
+    document.addEventListener('click', playAudio);
+    
+    // Keep playing when tab becomes visible
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && bgMusic.paused) {
+            bgMusic.play();
+        }
+    });
+
+    // Rest of your audio setup
     const correctSound = document.getElementById('correctSound');
     const wrongSound = document.getElementById('wrongSound');
-    const bgMusic = document.getElementById('bgMusic');
     
-    // Set up background music
-    bgMusic.volume = 0.15;  // Changed from 0.3 to 0.15 (15% volume)
-    bgMusic.loop = true;   
-    
-    // Function to start background music
-    function startBackgroundMusic() {
-        bgMusic.play()
-            .catch(error => {
-                console.log("Audio autoplay prevented:", error);
-                document.addEventListener('click', () => {
-                    bgMusic.play();
-                }, { once: true });
-            });
-    }
-
-    // Start background music
-    startBackgroundMusic();
-
-    // Ensure music continues playing after each sound effect
     correctSound.addEventListener('play', () => {
-        bgMusic.volume = 0.05;  // Changed from 0.1 to 0.05 during effects
+        bgMusic.volume = 0.03;  // Reduced to 3% during effects
     });
     
     correctSound.addEventListener('ended', () => {
-        bgMusic.volume = 0.15;  // Changed from 0.3 to 0.15
+        bgMusic.volume = 0.08;  // Back to 8%
     });
     
     wrongSound.addEventListener('play', () => {
-        bgMusic.volume = 0.05;  // Changed from 0.1 to 0.05 during effects
+        bgMusic.volume = 0.03;  // Reduced to 3% during effects
     });
     
     wrongSound.addEventListener('ended', () => {
-        bgMusic.volume = 0.15;  // Changed from 0.3 to 0.15
+        bgMusic.volume = 0.08;  // Back to 8%
     });
 
     function showCharacterDialogue(character, text) {
